@@ -1,5 +1,7 @@
 # Dev Added
 expenses.csv
+progression.md
+*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
