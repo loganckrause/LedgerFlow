@@ -1,0 +1,64 @@
+classDiagram
+    %% Django Models
+    class UserProfile {
+        user: OneToOneField(auth.User)
+    }
+    class Category {
+        name: CharField
+        user: ForeignKey(UserProfile)
+    }
+    class Account {
+        name: CharField
+        user: ForeignKey(UserProfile)
+    }
+    class Transaction {
+        amount
+        description
+        date
+        transaction_type
+        category: ForeignKey(Category)
+        user: ForeignKey(UserProfile)
+        account: ForeignKey(Account)
+        auto_categorize
+    }
+    class Budget {
+        category: ForeignKey(Category)
+        user: ForeignKey(UserProfile)
+        amount
+        period
+    }
+
+    UserProfile "1" -- "many" Category : owns
+    UserProfile "1" -- "many" Account : owns
+    UserProfile "1" -- "many" Transaction : makes
+    UserProfile "1" -- "many" Budget : sets
+    Category "1" -- "many" Transaction : categorizes
+    Category "1" -- "many" Budget : budgets
+    Account "1" -- "many" Transaction : records
+
+    %% React Components
+    class App {
+        +categories
+        +Renders AddTransactionForm
+        +Renders TransactionList
+        +Renders Dashboard
+    }
+    class AddTransactionForm {
+        +form state
+        +handleSubmit()
+        +handleSuggestCategory()
+    }
+    class TransactionList {
+        +transactions
+        +useEffect()
+        +setTransactions()
+    }
+    class Dashboard {
+        +chartData
+        +useEffect()
+        +setChartData()
+    }
+
+    App --> AddTransactionForm : renders
+    App --> TransactionList : renders
+    App --> Dashboard : renders
