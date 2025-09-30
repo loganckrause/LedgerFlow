@@ -30,7 +30,7 @@ class TransactionSerializer(serializers.ModelSerializer):
             "date",
             "description",
             "category",
-            "user",
+            # "user",
             "auto_categorize",
         ]
 

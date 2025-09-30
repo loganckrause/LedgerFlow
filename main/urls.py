@@ -11,5 +11,7 @@ router.register(r"accounts", AccountViewSet)
 router.register(r"budgets", BudgetViewSet)
 
 urlpatterns = [
+    path("categorize/", views.categorize_view, name="categorize"),
+    path("transactions/", views.transaction_view, name="transaction"),
     path("", include(router.urls)),
 ]

@@ -45,9 +45,7 @@ class Transaction(models.Model):
     description = models.TextField()
     auto_categorize = models.BooleanField(default=False)
 
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="transactions"
-    )
+    category = models.TextField()
     user = models.ForeignKey(
         UserProfile, on_delete=models.CASCADE, related_name="transactions"
     )
